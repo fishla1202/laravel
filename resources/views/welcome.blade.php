@@ -12,6 +12,7 @@
         </p>
     </div>
     <h2>Recent Question:</h2>
+    
  </div>
  
  @endsection('content)

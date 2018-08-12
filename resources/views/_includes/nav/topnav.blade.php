@@ -15,7 +15,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="{{ route('index') }}">Home</a></li>
-        <li><a href="#">Recent</a></li>
+        <li><a href="{{ route('questions.index') }}">Recent</a></li>
         <li><a href="#">Popular</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
