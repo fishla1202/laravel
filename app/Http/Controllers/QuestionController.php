@@ -14,7 +14,12 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        // use all mathod to find all data in the database
+        // use paginate(number) 可以設定一頁顯示幾個結果出來
+        // use orderBy('id', 'desc') 設定結果由新到舊 依據id
+        $questions = Question::orderBy('id', 'desc')->paginate(5);
+        // pass the data to the view
+        return view('questions.index')->with('questions', $questions);
     }
 
     /**
@@ -63,7 +68,10 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        //use modle get one record form database
+        $question = Question::findOrFail($id);// find 沒收尋到記錄不會報錯 findOrFail 會報錯 其他都一樣
+        //show the view pass the record to the view
+        return view('questions.show')->with('question', $question);
     }
 
     /**
