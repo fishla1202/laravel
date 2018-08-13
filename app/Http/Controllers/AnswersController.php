@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use App\Answer;
+use Auth;
 
 class AnswersController extends Controller
 {
@@ -29,6 +30,7 @@ class AnswersController extends Controller
 
         $answer = new Answer();
         $answer->content = $request->content;
+        $answer->user()->associate(Auth::id());
 
         $question = Question::findOrFail($request->question_id);
         //將外來鍵關聯

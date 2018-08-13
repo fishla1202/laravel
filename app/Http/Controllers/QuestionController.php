@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Question;
+use Auth;
 
 class QuestionController extends Controller
 {
@@ -55,8 +56,10 @@ class QuestionController extends Controller
         $question = new Question();
         $question->title = $request->title;
         $question->description = $request->description;
+        // 關聯寫入表格 associate設定子模型的外鍵 Auth::id() 當前登入的user id
+        $question->user()->associate(Auth::id());
 
-        // 如果成功寫入 就轉去show得頁面 php artisan route:list
+        // 如果成功寫入 就轉去show得頁面 php artisan route:list 查看所有route
         if ($question->save()) {
             return redirect()->route('questions.show', $question->id);
         }else {
@@ -88,7 +91,12 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = Question::findorFail($id);
+        // 如果使用者id 和 問題的使用者id不符合 跳出權限拒絕403頁面
+        if ($question->user->id != Auth::id()) {
+            return abort(403);
+        }
+        return view('question.edit');
     }
 
     /**

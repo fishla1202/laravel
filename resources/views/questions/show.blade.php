@@ -5,6 +5,10 @@
     <p class="lead">
         {{ $question->description }}
     </p>
+    <p>
+        {{-- diffForhumans 設定時間格式 --}}
+        由：{{ $question->user->name }} 在 {{ $question->created_at->diffForHumans() }} 提交
+    </p>
     <hr>
     {{-- display answer --}}
     @if (count($question->answers) > 0)
@@ -14,6 +18,7 @@
                     <p>
                         {{ $answer->content }}
                     </p>
+                    <h6>由 {{ $answer->user->name }} 在 {{ $answer->created_at->diffForHumans() }} 提交</h6>
                 </div>
             </div>
         @endforeach
