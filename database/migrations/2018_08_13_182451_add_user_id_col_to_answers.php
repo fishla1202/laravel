@@ -28,7 +28,8 @@ class AddUserIdColToAnswers extends Migration
     public function down()
     {
         Schema::table('answers', function (Blueprint $table) {
-            $table->dropForeign('answers_user_id_foregin');
+
+            $table->dropForeign('answers_user_id_foreign');
             $table->dropColumn('user_id');
 
         });

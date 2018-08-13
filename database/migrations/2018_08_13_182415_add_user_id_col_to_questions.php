@@ -27,8 +27,8 @@ class AddUserIdColToQuestions extends Migration
     public function down()
     {
         Schema::table('questions', function (Blueprint $table) {
-            //表格名稱_欄位名稱_foregin
-            $table->dropForeign('questions_user_id_foregin');
+            //表格名稱_欄位名稱_foreign
+            $table->dropForeign('questions_user_id_foreign');
             $table->dropColumn('user_id');
         });
     }
