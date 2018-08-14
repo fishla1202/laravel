@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    <a href="{{ route('profile', $user->id) }}" class="btn btn-link btn-sm">查看你的問題與答案</a>
                 </div>
             </div>
         </div>
