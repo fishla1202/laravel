@@ -91,12 +91,12 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        $question = Question::findorFail($id);
+        $question = Question::findOrFail($id);
         // 如果使用者id 和 問題的使用者id不符合 跳出權限拒絕403頁面
         if ($question->user->id != Auth::id()) {
             return abort(403);
         }
-        return view('question.edit');
+        return view('questions.edit')->with('question', $question);
     }
 
     /**
@@ -108,7 +108,16 @@ class QuestionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::findOrFail($id);
+        $question->title = $request->title;
+        $question->description = $request->description;
+
+        if ($question->save()) {
+            return redirect()->route('questions.show', $question->id);
+        } else {
+            return redirect()->route('questions.edit', $question->id);
+        }
+
     }
 
     /**

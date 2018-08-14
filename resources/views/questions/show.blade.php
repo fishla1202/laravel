@@ -9,6 +9,10 @@
         {{-- diffForhumans 設定時間格式 --}}
         由：{{ $question->user->name }} 在 {{ $question->created_at->diffForHumans() }} 提交
     </p>
+    @if (Auth::id() == $question->user->id)
+            <a href="{{ route('questions.edit', $question->id) }}" class= "btn btn-primary btn-sm">修改</a>
+        </form>
+    @endif
     <hr>
     {{-- display answer --}}
     @if (count($question->answers) > 0)
@@ -19,6 +23,10 @@
                         {{ $answer->content }}
                     </p>
                     <h6>由 {{ $answer->user->name }} 在 {{ $answer->created_at->diffForHumans() }} 提交</h6>
+                    @if (Auth::id() == $question->user->id)
+                           <a href="{{ route('answers.edit', $answer->id) }}" class= "btn btn-primary btn-sm">修改</a>
+                        </form>
+                    @endif
                 </div>
             </div>
         @endforeach

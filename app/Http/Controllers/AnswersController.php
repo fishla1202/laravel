@@ -47,7 +47,12 @@ class AnswersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $answer = Answer::findOrFail($id);
+        // 如果使用者id 和 問題的使用者id不符合 跳出權限拒絕403頁面
+        if ($answer->user->id != Auth::id()) {
+            return abort(403);
+        }
+        return view('answers.edit')->with('answer', $answer);
     }
 
     /**
@@ -59,7 +64,12 @@ class AnswersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $answer = Answer::findOrFail($id);
+        $answer->content = $request->content;
+
+        $answer->save();
+
+        return redirect()->route('questions.show', $answer->question->id);
     }
 
     /**

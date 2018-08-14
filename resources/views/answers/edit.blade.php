@@ -19,17 +19,15 @@
   </head>
   <body>
     <div class="container">
-      <h1>Ask a Questions</h1>
+      <h1>Update Answer</h1>
       <hr />
-      <form action="{{ route('questions.store') }}" method="POST">
+      <form action="{{ route('answers.update', $answer->id) }}" method="POST">
         @csrf
-        <label for="title">Question:</label>
-        <input type="text" name="title" id="title" class="form-control" />
-
-        <label for="description">More Information:</label>
-        <textarea class="form-control" name="description" id="description" rows="4"></textarea>
-
-        <input type="submit" class="btn btn-primary" value="Submit Question" />
+        @method('PATCH')
+        <h1>問題：{{ $answer->question->title }}</h1>
+        <h4>修改答案：</h4>
+        <textarea class="form-control" name="content" rows="4">{{ $answer->content }}</textarea>
+        <input type="submit" class="btn btn-primary" value="確認修改" />
       </form>
     </div>
 
