@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Question;
 use App\Answer;
 use Auth;
+use App\Notifications\NewAnswerSubmitted;
 
 class AnswersController extends Controller
 {
@@ -35,6 +36,11 @@ class AnswersController extends Controller
         $question = Question::findOrFail($request->question_id);
         //將外來鍵關聯
         $question->answers()->save($answer);
+        // notify setup 當有人提出答案時寄信給問題的擁有者 user model has user email 所以有laravel會知道要寄給誰 
+        // NewAnswerSubmitted 傳入參數 答案,問題, 提出答案的user name 
+        // notitications 延遲很嚴重！！！！ google尋找解決方案！
+        $question->user->notify(new NewAnswerSubmitted($answer, $question, Auth::user()->name));
+
         //儲存成功導回頁面
         return redirect()->route('questions.show', $request->question_id);
     }
