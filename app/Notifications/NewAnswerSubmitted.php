@@ -35,7 +35,7 @@ class NewAnswerSubmitted extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail', 'nexmo'];
+        return ['mail'];
     }
 
     /**

@@ -21,6 +21,9 @@ Route::post('/contact', 'PageController@sendContact');
 Route::resource('questions', 'QuestionController');
 Route::resource('answers', 'AnswersController', ['except' => ['index', 'create', 'show']]);
 
+Route::get('/upload', 'UploadController@getUpload')->name('upload');
+Route::post('/upload', 'UploadController@postUpload');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

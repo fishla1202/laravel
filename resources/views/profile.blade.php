@@ -2,6 +2,7 @@
 
 @section('content')
   <div class="container">
+    <img src=" {{ $user->thumbnail }}" alt="user_pic" class="img-rounded pull-right" style="max-height:100px">
     <h1>{{ $user->name }}'s Profile</h1>
     <p>
       See what {{ $user->name }} has been up to on LaravelAnswers.
@@ -39,7 +40,7 @@
                 <small>{{ $user->name }}'s answer:</small><br />
                 {{ $answer->content }}
               </p>
-              <a href="{{ route('questions.show', $question->id) }}" class="btn btn-primary btn-sm">View Question</a>
+              <a href="{{ route('questions.show', $answer->question->id) }}" class="btn btn-primary btn-sm">View Question</a>
             </div>
           </div>
         @endforeach
