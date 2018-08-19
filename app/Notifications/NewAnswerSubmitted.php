@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\NexmoMessage;
 
-class NewAnswerSubmitted extends Notification
+class NewAnswerSubmitted extends Notification implements ShouldQueue
 {
     use Queueable;
 
